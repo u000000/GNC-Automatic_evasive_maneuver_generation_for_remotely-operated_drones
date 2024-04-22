@@ -2,7 +2,7 @@
 % Dumbass, don't forget gravity!
 g = 9.81;
 
-motor_thrust = 5;
+motor_thrust = 7.5;
 % Individual arm mass and total mass
 mass_arm = 0.18; % kg (180 grams)
 total_mass = 1; % kg
