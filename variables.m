@@ -1,3 +1,7 @@
+%% Look into:
+%https://www.zora.uzh.ch/id/eprint/111164/1/ICRA15_Faessler.pdf
+%https://www.youtube.com/watch?v=pGU1s6Y55JI
+
 %% Generate Model
 % Dumbass, don't forget gravity!
 g = 9.81;
@@ -39,10 +43,11 @@ M_rb = [total_mass*eye(3),zeros(3,3);
 
 
 %% Generate Waypoints:
-% connecting two segments
-% Jerome Jouffroy, March 2024
 
-W = [ 0 , 2 , 8 , 10 ; 0 , 5 , 5 , 10; 0 , 4 , 4 , 10 ];
+W = [ 
+    0 , 25 , 40 , 50 ; 
+    0 , 10 , 40 , 45; 
+    5 , 80 , 100 , 110 ];
 
 
 % point 0
@@ -66,19 +71,19 @@ py_3 = W(2,3+1);
 pz_3 = W(3,3+1);
 
 % velocities
-v_0 = 10; % longitudinal path "speed"
+v_0 = 100; % longitudinal path "speed"
 v_0_ = [pz_1-pz_0,py_1-py_0,px_1-px_0]/norm([pz_1-pz_0,py_1-py_0,px_1-px_0]);
 vx_0 = v_0_(3) * v_0;
 vy_0 = v_0_(2) * v_0;
 vz_0 = v_0_(1) * v_0;
 
-v_1 = 10; % longitudinal path "speed"
+v_1 = 100; % longitudinal path "speed"
 v_1_ = [pz_2-pz_1,py_2-py_1,px_2-px_1]/norm([pz_2-pz_1,py_2-py_1,px_2-px_1]);
 vx_1 = v_1_(3) * v_1;
 vy_1 = v_1_(2) * v_1;
 vz_1 = v_1_(1) * v_1;
 
-v_2 = 10; % longitudinal path "speed"
+v_2 = 100; % longitudinal path "speed"
 v_2_ = [pz_3-pz_2,py_3-py_2,px_3-px_2]/norm([pz_3-pz_2,py_3-py_2,px_3-px_2]);
 vx_2 = v_2_(3) * v_2;
 vy_2 = v_2_(2) * v_2;
@@ -118,9 +123,9 @@ BCz = [ pz_0 ; vz_0 ; pz_1 ; 0 ; 0 ; pz_1 ; pz_2 ; 0 ; 0 ; pz_2 ; pz_3 ; vz_3 ];
 alpha_z = Bmatrix\BCz;
 
 % computing paths
-sigma1 = 0:0.01:1;
-sigma2 = 1.01:0.01:2;
-sigma3 = 2.01:0.01:3;
+sigma1 = 0:0.05:1;
+sigma2 = 1.05:0.05:2;
+sigma3 = 2.05:0.05:3;
 sigma = [sigma1 , sigma2 , sigma3];
 path_x = zeros(length(sigma),1);
 path_y = zeros(length(sigma),1);
